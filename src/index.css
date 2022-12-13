@@ -9,6 +9,7 @@ body{
   font-family:'Inter';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:var(--nav-background-color)
 }
 
 code {
@@ -17,77 +18,111 @@ code {
 }
 
 
-nav{
+.container{
+  background-color:var(--main-content-background-color);
+  margin:10% auto;
+  width: 450px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+
+
+.profile-picture{
+  width:100%;
+}
+
+.personal-info{
+  margin-top: 20px;
+  text-align:center;
   display:flex;
-  padding:0 20px;
-  background-color:var(--nav-background-color);
-  align-items: center;
+  flex-direction: column;
+  gap:5px
 }
 
-.left-nav-section{
-  display:flex;
-  margin-right: auto;
-  gap:10px;
-  align-items: center;
-  color:var(--nav-font-color);
-  
-}
-
-.left-nav-section > h2{
-  font-size: 22.25px;
-}
-
-.right-nav-section{
-  color:var(--nav-font-color);
-}
-
-.right-nav-section > h2{
-  font-size: 16px;
-}
-
-.nav-logo{
-  width:28.93px;
-  height:28.93px;
-}
-
-.main-facts{
-  list-style: none;
-}
-
-.main-content{
-  background-color: var(--main-content-background-color);
-  background-image: url('./background.png');
-  background-repeat:no-repeat;
-  background-position: right 75%;
-  height:100vh;
-  padding:10px 20px;
-  position:relative;
-}
-
-
-.main-title{
+.profile-name{
   margin:0;
-  font-size: 39.06px;
   color:white;
 }
-.main-facts > li::before{
-  content: "\2022";
-  color:var(--nav-font-color);
-  /* font-weight:700; */
-  font-size: 20px;
-  margin-right: 20px;
+
+.occupation{
+  margin:0;
+  color: #F3BF99;
+  font-weight:300;
 }
 
-.main-facts{
-  padding:0;
-  margin-left:20px;
-}
-
-.main-facts > li{
+.website-link{
   color:white;
-  font-size: 16px;
+  text-decoration: none;
 }
 
-.main-facts > li + li{
-  margin-top: 10px;
+.button-group{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding:0 30px;
+}
+
+.button-group > button{
+  width:100%;
+  border:none;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius:10px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.linkedin-button{
+  background-color: #5093E2;
+  color:white;
+}
+
+.email-button{
+  color:gray;
+}
+
+.button-group > button >img{
+  width: 24px;
+}
+
+.button-group > button > p{
+  margin:0;
+}
+
+.main-section{
+  color:white;
+  padding: 0 50px;
+  margin-top: 20px;
+  display:flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.main-section > div > p{
+  color: #DCDCDC;
+}
+
+.main-section > div > h1{
+  margin: 0 0 10px 0;
+}
+
+footer{
+  bottom:0;
+  width:100%;
+  background-color: #161619;
+  padding: 20px 0;
+  display:flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+footer > img{
+  cursor: pointer;
 }

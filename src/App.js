@@ -1,14 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {Component} from 'react';
-import Navbar from './components/Navbar';
+import Info from './components/Info';
 import Main from './components/Main';
+import Footer from './components/Footer';
 
 const App = () => {
   return(
     <div className="container">
-      <Navbar/>
+      <Info/>
       <Main/>
+      <Footer/>
     </div>
   );
 }
