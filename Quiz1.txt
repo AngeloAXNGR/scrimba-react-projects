@@ -1,0 +1,23 @@
+1. Why do we need to `import React from "react"` in our files?
+  - This is necessary inorder to make use of methods provided by the React Library;
+
+2. If I were to console.log(page) in index.js. what would show up?
+  - Displays an object
+
+3.What's wrong with this code:
+```
+const page = (
+  <h1>Hello</h1>
+  <p>This is my website!</p>
+)
+```
+
+  - The elements are not nested into one single element (siblings cannot be rendered properly, it needs a parent element to house those siblings)
+
+
+4. What does it mean for something to be "declarative" instead of "imperative"?
+  - Declarative = Give instruction on what to do without worrying too much on the exact steps on how to do it.
+  - Imperative = Give instruction including detailed step by step process in achieving a task.
+
+5. What does it mean for something to be composable?
+  - Object that can be broken down into reusable parts.
