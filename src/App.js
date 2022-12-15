@@ -1,16 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {Component, useState, useEffect} from 'react';
+import Header from './components/Header';
 import Journal from './components/Journal';
 import data from './data/data';
 
-const App = () => {
+const travelCards = data.map(item =>{
+  return(
+    <Journal
+      {...item}
+    />
+  )
+})
 
-  console.log(data);
+const App = () => {
 
   return(
     <div className="container">
-      <Journal/>
+      <Header
+        icon="globe-icon.png"
+      />
+
+      <div className="journals">
+        {travelCards}
+      </div>
     </div>
 
   );
