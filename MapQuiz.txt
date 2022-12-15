@@ -1,0 +1,11 @@
+1. What does the `.map()` array method do?
+  - Shapes values of array elements into a different value (these values are returned into a new array).
+
+
+2. What do we usually use `.map()` for in React?
+  - Convert data to JSX elements to be displayed on a page
+
+
+3. Why is using `.map()` better than just creating the components
+   manually by typing them out?
+  - Eliminates Repetition in calling components.
