@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import boxes from './boxes';
-import Box from './components/Box';
+import Box from '../components/Box';
 
 
 

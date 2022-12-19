@@ -7,12 +7,15 @@ import './App.css';
 
 
 const App = () => {
-
-
+  const [firstName, setFirstName] = React.useState('');
   return(
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <form>
+      <input 
+        type="text" 
+        placeholder='First Name'
+        
+      />
+    </form>
   )
 }
 export default App;
