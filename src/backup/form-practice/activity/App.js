@@ -39,9 +39,8 @@ const App = () => {
 
   function handleSubmit(event) {
     event.preventDefault()
-    
     if(account.password !== account.passwordConfirm){
-      console.log("Passwords do not match")
+      console.log("Passwords does not match")
     }else{
       if(account.subscription === true){
         console.log(account);
