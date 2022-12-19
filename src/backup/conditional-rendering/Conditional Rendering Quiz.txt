@@ -1,0 +1,19 @@
+1. What is "conditional rendering"?
+  - Conditional rendering is when as well as how a certain component should be shown
+    based on a condition.
+
+
+2. When would you use &&?
+  - If you simply want to show or hide a component based on a truthy value
+
+
+
+3. When would you use a ternary?
+  - Show a component is viewed based on multiple possible condition
+
+
+
+4. What if you need to decide between > 2 options on
+   what to display?
+  - Both && and ternary could work but using ternary might make the code
+    less vebose.
