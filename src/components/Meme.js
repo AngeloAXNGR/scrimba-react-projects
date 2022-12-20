@@ -13,13 +13,25 @@ const Meme = () =>{
 
   const [allMemeImages, setAllMemeImages] = React.useState(memesData)
 
-  function getMemeImage(){
+  function handleInput(event){
+    console.log(meme);
+    const {name, value} = event.target
+    setMeme(prevMeme => {
+      return {
+        ...prevMeme,
+        [name]:value
+      }
+    })
+  }
+
+  function getMemeImage(event){
+    event.preventDefault();
     const memesArray = allMemeImages.data.memes
     const randomNumber = Math.floor((Math.random() * memesArray.length));
     const url = memesArray[randomNumber].url
 
     setMeme(prevMeme => {
-      return {...prevMeme, topText: "Test1", bottomText: "Test2", randomImage:url};
+      return {...prevMeme, topText: prevMeme.topText, bottomText: prevMeme.bottomText, randomImage:url};
     })
     console.log(randomNumber);
     console.log(url);
@@ -28,13 +40,25 @@ const Meme = () =>{
 
   return(
     <main>
-      <div className="form">
+      <form className="form">
         <div className="form-inputs">
-          <input type="text" placeholder="Top Text"/>
-          <input type="text" placeholder="Bottom Text"/>
+          <input 
+            type="text" 
+            placeholder="Top Text"
+            onChange={handleInput}
+            name="topText"
+            value={meme.topText}
+          />
+          <input 
+            type="text" 
+            placeholder="Bottom Text"
+            onChange={handleInput}
+            name="bottomText"
+            value={meme.bottomText}
+          />
         </div>
         <button onClick={getMemeImage} className="generator-button">Get a new meme image 🖼</button>
-      </div>
+      </form>
 
       <div className="meme-container">
         <h1 className="top-text">

@@ -31,16 +31,16 @@ const App = () => {
     //   <Thing/>
     // </div>
 
-    <div className="state-inheritance-practice">
-      <Header2 username={username}/>
-      <Body username={username}/>
-    </div>
-
-
-    // <div className="container">
-    //   <Header/>
-    //   <Meme/>
+    // <div className="state-inheritance-practice">
+    //   <Header2 username={username}/>
+    //   <Body username={username}/>
     // </div>
+
+
+    <div className="container">
+      <Header/>
+      <Meme/>
+    </div>
 
   );
 }
