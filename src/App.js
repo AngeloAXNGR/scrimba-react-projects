@@ -4,6 +4,7 @@ import Main from "./components/Main"
 
 export default function App() {
   const [darkMode, setDarkMode] = React.useState(true);
+  
     function toggleDarkMode(){
       setDarkMode(prevMode => {return !prevMode})
     }
@@ -16,7 +17,6 @@ export default function App() {
             />
             <Main
               darkMode={darkMode}
-              toggleDarkMode={() => toggleDarkMode()}
              />
         </div>
     )
