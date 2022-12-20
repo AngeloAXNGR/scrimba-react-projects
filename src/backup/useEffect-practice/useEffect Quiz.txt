@@ -1,0 +1,24 @@
+1. What is a "side effect" in React? What are some examples?
+   - Any code that affects an outside system.
+   - Code logic with functionalities that React is not responsible of 
+   (api calls, localStorage, syncing two states)
+
+
+2. What is NOT a "side effect" in React? Examples?
+   - Anything thing React in charge of
+   - e.g Props, maintaining states for each render, rendering DOM etc..
+
+
+3. When does React run your useEffect function? When does it NOT run
+   the effect function?
+   - As soon as the component loads (first render)
+   - On every re-render of the component (assuming no dependencies array)
+   - Will NOT run the effect when the values of the dependencies in the
+   array stay the same between renders
+   
+
+
+4. How would you explain what the "dependecies array" is?
+   - Array of values that serves as a basis on whether certain code should rerun or not
+     when using useEffect.
+
