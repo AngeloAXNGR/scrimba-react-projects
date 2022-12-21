@@ -3,6 +3,7 @@ import Die from "./components/Die"
 import { nanoid } from "nanoid"
 
 
+
 export default function App() {
 
 
@@ -37,7 +38,7 @@ export default function App() {
             newDice.push(generateNewDie())
         }
 
-        console.log(newDice);
+        // console.log(newDice);
         return newDice
     }
 
@@ -133,6 +134,46 @@ export default function App() {
     }
 
 
+    /**
+     * Challenge:
+     * 1. Add new state called `tenzies`, default to false. It
+     *    represents whether the user has won the game yet or not.
+     * 2. Add an effect that runs every time the `dice` state array 
+     *    changes. For now, just console.log("Dice state changed").
+     */
+
+    const [tenzies, setTenzies] = React.useState(false);
+
+
+
+    /**
+     * Challenge: Check the dice array for these winning conditions:
+     * 1. All dice are held, and
+     * 2. all dice have the same value
+     * 
+     * If both conditions are true, set `tenzies` to true and log
+     * "You won!" to the console
+     */
+
+    // Reason why useEffect is being utilized: 
+    // - Because we are trying to sync the state between dice and tenzies
+    React.useEffect(()=>{
+        const allHeld = dice.every(die => die.isHeld);
+        const firstValue = dice[0].value;
+        const allSameValue = dice.every(die => die.value === firstValue)
+
+        if(allHeld && allSameValue){
+            setTenzies(true)
+            console.log('Game Won!');
+        }
+    },[dice])
+
+
+    function resetGame(){
+        setDice(allNewDice());
+        setTenzies(false);
+    }
+
 
     return (
         <main>
@@ -148,7 +189,8 @@ export default function App() {
                     {dieElements}
                 </div>
 
-                <button className="roll-dice" onClick={rollDice}>Roll</button>
+                {!tenzies && <button className="roll-dice" onClick={rollDice}>Roll</button>}
+                {tenzies && <button className="roll-dice" onClick={resetGame}>Play Again</button>}
             </div>
         </main>
     )
