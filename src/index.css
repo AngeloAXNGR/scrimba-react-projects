@@ -57,6 +57,7 @@ code {
   margin:auto;
   gap: 20px;
   justify-content: center;
+  cursor: pointer;
 }
 
 .choice{
