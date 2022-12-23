@@ -54,13 +54,11 @@ code {
 }
 
 .choice{
-  border:2px solid #293264;
   border-radius: 8px;
   padding: 10px 20px;
-  color:#293264;
-  font-weight:bold;
   display:flex;
   align-items: center;
+  font-size: 2rem;
 }
 
 .check-answers{
