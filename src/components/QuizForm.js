@@ -4,10 +4,13 @@ import { nanoid } from "nanoid";
 
 const QuizForm = () => {
   const [questions, setQuestions] = useState(()=>{return []});
+  const [score, setScore] = useState(0);
+  const [end, setEnd] = useState(false);
+  const [startGame, setStartGame] = useState(false);
 
   useEffect(()=>{
     async function getQuestions(){
-      const response = await fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+      const response = await fetch("https://opentdb.com/api.php?amount=2&type=multiple")
       const data = await response.json();
       const resultArray = data.results;
       let revisedData = resultArray.map(result => {
@@ -28,16 +31,15 @@ const QuizForm = () => {
         }
       })
 
-      // console.log(test);
       setQuestions(revisedData)
     }
 
     getQuestions();
-  },[])
+  },[startGame])
 
 
   const Question = (props) =>{
-    function lockChoice(id){
+    function selectAnswer(id){
       const questionId = props.id;
       const choiceId = id;
       console.log("Question ID: " + questionId);
@@ -45,17 +47,14 @@ const QuizForm = () => {
       setQuestions(prevQuestions => {
         return prevQuestions.map((questionItem) =>{
           return questionItem.id === questionId
-          ? {...questionItem, choices:test(id, questionItem.choices)}
+          ? {...questionItem, choices:lockChoice(id, questionItem.choices)}
           : questionItem
         })
       });
 
     }
 
-    function test(id, choices){
-      console.log("function ran");
-      console.log(id);
-      console.log(choices);
+    function lockChoice(id, choices){
       return choices.map(item =>
           {return item.id === id ? {...item, selected:true}: {...item, selected:false}}
         )
@@ -64,11 +63,12 @@ const QuizForm = () => {
     const choices = props.choices.map(choice => 
       <Choices 
         key={choice.id}
-        value={choice.value}
-        getId={()=>lockChoice(choice.id)}
+        value={ReactHtmlParser(choice.value)}
+        getId={()=>selectAnswer(choice.id)}
         selected={choice.selected}
       />
     )
+
     return(
       <div className="question">
         <h1>{props.question}</h1>
@@ -82,8 +82,10 @@ const QuizForm = () => {
 
   const Choices = (props) => {
     const styles = {
-      backgroundColor: props.selected ? "red" : "white",
-      border: props.selected ? "none" : "2px solid #293264;"
+      backgroundColor: props.selected ? "#293264" : "white",
+      border: props.selected ? "2px solid white" : "2px solid #293264",
+      color: props.selected ? "white" : "#293264",
+      fontWeight: props.selected ? "bold" : "normal",
     }
     return(
       <div style={styles} className="choice" onClick={props.getId}>{props.value}</div>
@@ -102,16 +104,34 @@ const QuizForm = () => {
       )
   })
 
-
   function checkAnswers(){
-    console.log(questions);
+    try{for(let i = 0; i < questions.length; i++){
+      const selectedAnswer = questions[i].choices.find((choice) => choice.selected === true).value
+      const correctAnswer = questions[i].correctAnswer;
+      console.log("Your Answer: " + selectedAnswer)
+      console.log('Answer: ' + correctAnswer)
+      if(selectedAnswer === questions[i].correctAnswer){
+        setScore(prevScore => prevScore + 1);
+      }
+    }
+    setEnd(true);}
+    catch(err){
+      alert('All questions must be answered')
+    }
+  }
+
+  function restartGame(){
+    setStartGame(prevGame => !prevGame)
+    setEnd(false);
+    setScore(0);
   }
   
-  console.log(questions)
   return(
     <div className="quiz-form">
       <div className="questions">{questionElements} </div>
-      <button className="check-answers" onClick={checkAnswers}>Check Answers</button>
+      {!end && <button className="check-answers" onClick={checkAnswers}>Check Answers</button>}
+      {end && <button className="check-answers" onClick={restartGame}>Restart</button>}
+      {end && <h1>Final Score: {score}</h1>}
     </div>
   );
 }
