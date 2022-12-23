@@ -75,6 +75,7 @@ const QuizForm = () => {
         <div onClick={props.handleClick} className="choices">
           {choices}
         </div>
+        <h1>{end ? `Correct Answer: ${props.correctAnswer}` : ReactHtmlParser("&#10240;")}</h1>
       </div>
     )
   }
@@ -100,6 +101,7 @@ const QuizForm = () => {
         id={question.id}
         question={parsedQuestion} 
         choices={question.choices}
+        correctAnswer={question.correctAnswer}
         />
       )
   })
@@ -131,7 +133,7 @@ const QuizForm = () => {
       <div className="questions">{questionElements} </div>
       <div className="result-section">
         {!end && <button className="check-answers" onClick={checkAnswers}>Check Answers</button>}
-        {end && <h1>Final Score: {score}</h1>}
+        {end && <h1>Final Score: {score}/{questions.length}</h1>}
         {end && <button className="check-answers" onClick={restartGame}>Restart</button>}
       </div>
     </div>
