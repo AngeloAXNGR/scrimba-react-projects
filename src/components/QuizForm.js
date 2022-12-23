@@ -3,7 +3,7 @@ import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from
 import { nanoid } from "nanoid";
 
 const QuizForm = () => {
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState(()=>{return []});
 
   useEffect(()=>{
     async function getQuestions(){
@@ -35,28 +35,83 @@ const QuizForm = () => {
     getQuestions();
   },[])
 
+
   const Question = (props) =>{
-    const choices = props.choices.map(choice => <div className="choice">{choice.value}</div>)
+    function lockChoice(id){
+      const questionId = props.id;
+      const choiceId = id;
+      console.log("Question ID: " + questionId);
+      console.log("Choice ID: " + choiceId)
+      setQuestions(prevQuestions => {
+        return prevQuestions.map((questionItem) =>{
+          return questionItem.id === questionId
+          ? {...questionItem, choices:test(id, questionItem.choices)}
+          : questionItem
+        })
+      });
+
+    }
+
+    function test(id, choices){
+      console.log("function ran");
+      console.log(id);
+      console.log(choices);
+      return choices.map(item =>
+          {return item.id === id ? {...item, selected:true}: {...item, selected:false}}
+        )
+    }
+
+    const choices = props.choices.map(choice => 
+      <Choices 
+        key={choice.id}
+        value={choice.value}
+        getId={()=>lockChoice(choice.id)}
+        selected={choice.selected}
+      />
+    )
     return(
       <div className="question">
         <h1>{props.question}</h1>
-        <div className="choices">
+        <div onClick={props.handleClick} className="choices">
           {choices}
         </div>
       </div>
     )
   }
 
+
+  const Choices = (props) => {
+    const styles = {
+      backgroundColor: props.selected ? "red" : "white",
+      border: props.selected ? "none" : "2px solid #293264;"
+    }
+    return(
+      <div style={styles} className="choice" onClick={props.getId}>{props.value}</div>
+    )
+  }
+
   const questionElements = questions.map(question => {
     const parsedQuestion = ReactHtmlParser(question.question)
-    return <Question question={parsedQuestion} choices={question.choices}/>
+    return( 
+      <Question 
+        key={question.id}
+        id={question.id}
+        question={parsedQuestion} 
+        choices={question.choices}
+        />
+      )
   })
+
+
+  function checkAnswers(){
+    console.log(questions);
+  }
   
   console.log(questions)
   return(
     <div className="quiz-form">
       <div className="questions">{questionElements} </div>
-      <button className="check-answers">Check Answers</button>
+      <button className="check-answers" onClick={checkAnswers}>Check Answers</button>
     </div>
   );
 }
