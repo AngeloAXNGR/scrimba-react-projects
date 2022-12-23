@@ -10,7 +10,7 @@ const QuizForm = () => {
 
   useEffect(()=>{
     async function getQuestions(){
-      const response = await fetch("https://opentdb.com/api.php?amount=2&type=multiple")
+      const response = await fetch("https://opentdb.com/api.php?amount=10&type=multiple")
       const data = await response.json();
       const resultArray = data.results;
       let revisedData = resultArray.map(result => {
@@ -36,6 +36,7 @@ const QuizForm = () => {
 
     getQuestions();
   },[startGame])
+
 
 
   const Question = (props) =>{
@@ -80,7 +81,6 @@ const QuizForm = () => {
     )
   }
 
-
   const Choices = (props) => {
     const styles = {
       backgroundColor: props.selected ? "#293264" : "white",
@@ -89,7 +89,7 @@ const QuizForm = () => {
       fontWeight: props.selected ? "bold" : "normal",
     }
     return(
-      <div style={styles} className="choice" onClick={props.getId}>{props.value}</div>
+      <div style={styles} className="choice" onClick={end ?  undefined : props.getId }>{props.value}</div>
     )
   }
 
@@ -116,16 +116,22 @@ const QuizForm = () => {
         setScore(prevScore => prevScore + 1);
       }
     }
-    setEnd(true);}
+    setEnd(true);
+  }
     catch(err){
       alert('All questions must be answered')
     }
+
   }
 
   function restartGame(){
     setStartGame(prevGame => !prevGame)
     setEnd(false);
     setScore(0);
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    })
   }
   
   return(
