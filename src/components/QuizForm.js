@@ -129,9 +129,11 @@ const QuizForm = () => {
   return(
     <div className="quiz-form">
       <div className="questions">{questionElements} </div>
-      {!end && <button className="check-answers" onClick={checkAnswers}>Check Answers</button>}
-      {end && <button className="check-answers" onClick={restartGame}>Restart</button>}
-      {end && <h1>Final Score: {score}</h1>}
+      <div className="result-section">
+        {!end && <button className="check-answers" onClick={checkAnswers}>Check Answers</button>}
+        {end && <h1>Final Score: {score}</h1>}
+        {end && <button className="check-answers" onClick={restartGame}>Restart</button>}
+      </div>
     </div>
   );
 }
