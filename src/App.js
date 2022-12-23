@@ -1,6 +1,5 @@
 import React from "react"
 import QuizForm from "./components/QuizForm";
-import { nanoid } from "nanoid"
 
 
 
